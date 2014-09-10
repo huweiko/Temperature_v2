@@ -62,7 +62,7 @@ public class CaptureActivity extends BaseActivity implements Callback, OnClickLi
 	private int mDeviceDesCount = 0;
 	private AppContext appContext;
 	
-	private String mPrevDeviceMacid = "asa";
+	private String mPrevDeviceMacid = "";
 	//扫描的设备列表
 	private List<DeviceScanning> lvDevData = new ArrayList<DeviceScanning>();
 	/*
