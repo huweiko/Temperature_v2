@@ -1,0 +1,412 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".DistrictListViewActivity" >
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutSetting"
+        android:layout_width="fill_parent"
+        android:layout_height="80dip"
+        android:background="@color/theme_blue_color"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/ImageButtonSettingActivityBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/theme_blue_color"
+            android:padding="10.0dip"
+            android:src="@drawable/setting_activity_back_button" />
+
+        <ImageButton
+            android:id="@+id/ImageButtonSettingUserGravatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/theme_blue_color"
+            android:padding="10.0dip"
+            android:src="@drawable/user_gravatar" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/setting_activity_title_Textview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/more_title_setting"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayoutSetting"
+        android:layout_marginTop="1px" 
+        android:scrollbars="vertical">
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:background="@color/white">
+	<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <TextView
+                android:id="@+id/TextViewSystemSeting"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/theme_blue_option_color"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/system_title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="1px"
+                android:layout_toRightOf="@+id/TextViewSystemSeting"
+                android:layout_alignTop="@+id/TextViewSystemSeting"
+           		android:layout_alignBottom="@+id/TextViewSystemSeting"
+                android:background="@color/theme_blue_option_color"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutUpdate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_onclick" >
+
+            <ImageView
+                android:id="@+id/ImageViewStartup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+                android:src="@drawable/startup" />
+
+            <TextView
+                android:id="@+id/TextViewStartupIns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ImageViewStartup"
+                android:layout_toRightOf="@+id/ImageViewStartup"
+                android:text="@string/Run_on_startup" 
+                android:textSize="@dimen/text_size_17"
+                android:textColor="@color/theme_gray_text_color"/>
+			<LinearLayout 
+			    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TextViewStartupIns"
+                android:layout_below="@+id/TextViewStartupIns"
+                android:orientation="horizontal">
+			    <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="@string/Whether_to_start_automatically" 
+	                android:paddingBottom="10dp"
+	                android:textSize="@dimen/text_size_13"
+                	android:textColor="@color/theme_gray_text_color"/>  
+	            <TextView
+	                android:id="@+id/TextViewUpdateVersion"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:paddingBottom="10dp"
+	                android:textSize="@dimen/text_size_13"
+                	android:textColor="@color/theme_gray_text_color"/>  
+			</LinearLayout>
+
+           	<CheckBox
+	            android:id="@+id/CheckBoxStartup"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	           	android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+	            style="@style/SettingCheckBox"/> 
+
+        </RelativeLayout>
+        
+        
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutBackground"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_onclick" >
+
+            <ImageView
+                android:id="@+id/ImageViewBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+                android:src="@drawable/background" />
+
+            <TextView
+                android:id="@+id/TextViewBackgroundIns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ImageViewBackground"
+                android:layout_toRightOf="@+id/ImageViewBackground"
+                android:text="@string/Run_in_background" 
+                android:textSize="@dimen/text_size_17"
+                android:textColor="@color/theme_gray_text_color"/>
+		    <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TextViewBackgroundIns"
+                android:layout_below="@+id/TextViewBackgroundIns"
+                android:text="@string/Whether_to_run_in_the_background" 
+                android:paddingBottom="10dp"
+                android:textSize="@dimen/text_size_13"
+               	android:textColor="@color/theme_gray_text_color"/>  
+
+           	<CheckBox
+	            android:id="@+id/CheckBoxBackground"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	           	android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+	            style="@style/SettingCheckBox"/> 
+
+        </RelativeLayout>
+        
+        
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <TextView
+                android:id="@+id/TextViewMonitorSetting"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/theme_blue_option_color"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/surveil_title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="1px"
+                android:layout_toRightOf="@+id/TextViewMonitorSetting"
+                android:layout_alignTop="@+id/TextViewMonitorSetting"
+           		android:layout_alignBottom="@+id/TextViewMonitorSetting"
+                android:background="@color/theme_blue_option_color"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutRefreshFrequency"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_onclick" >
+
+            <ImageView
+                android:id="@+id/ImageViewRefreshFrequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+                android:src="@drawable/refresh_frequency" />
+
+            <TextView
+                android:id="@+id/TextViewRefreshFrequencyIns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ImageViewRefreshFrequency"
+                android:layout_toRightOf="@+id/ImageViewRefreshFrequency"
+                android:text="@string/Refresh_frequency" 
+                android:textSize="@dimen/text_size_17"
+                android:textColor="@color/theme_gray_text_color"/>
+		    <TextView
+		        android:id="@+id/TextViewRefreshFrequencyInterval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TextViewRefreshFrequencyIns"
+              	android:layout_below="@+id/TextViewRefreshFrequencyIns"
+                android:text="@string/Refresh_devices_status" 
+                android:paddingBottom="10dp"
+                android:textSize="@dimen/text_size_13"
+               	android:textColor="@color/theme_gray_text_color"/>  
+
+           	<ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:src="@drawable/arrow_right_pic" /> 
+
+        </RelativeLayout>
+    </LinearLayout>
+    
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <TextView
+                android:id="@+id/TextViewMonitorNotifications"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/theme_blue_option_color"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/notifications_title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="1px"
+                android:layout_toRightOf="@+id/TextViewMonitorNotifications"
+                android:layout_alignTop="@+id/TextViewMonitorNotifications"
+           		android:layout_alignBottom="@+id/TextViewMonitorNotifications"
+                android:background="@color/theme_blue_option_color"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutNotification"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_onclick" >
+
+            <ImageView
+                android:id="@+id/ImageViewNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+                android:src="@drawable/notification" />
+
+            <TextView
+                android:id="@+id/TextViewNotificationIns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ImageViewNotification"
+                android:layout_toRightOf="@+id/ImageViewNotification"
+                android:text="@string/Notifications" 
+                android:textSize="@dimen/text_size_17"
+                android:textColor="@color/theme_gray_text_color"/>
+		    <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TextViewNotificationIns"
+              	android:layout_below="@+id/TextViewNotificationIns"
+                android:text="@string/Whether_to_receive_notification" 
+                android:paddingBottom="10dp"
+                android:textSize="@dimen/text_size_13"
+               	android:textColor="@color/theme_gray_text_color"/>  
+
+           	<CheckBox
+	            android:id="@+id/CheckBoxNotification"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	           	android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+	            style="@style/SettingCheckBox"/> 
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/RelativeLayoutCheckFrequency"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_onclick" >
+
+            <ImageView
+                android:id="@+id/ImageViewCheckFrequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+                android:src="@drawable/check_frequency" />
+
+            <TextView
+                android:id="@+id/TextViewCheckFrequencyEIns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ImageViewCheckFrequency"
+                android:layout_toRightOf="@+id/ImageViewCheckFrequency"
+                android:text="@string/Check_frequency" 
+                android:textSize="@dimen/text_size_17"
+                android:textColor="@color/theme_gray_text_color"/>
+		    <TextView
+		        android:id="@+id/TextViewCheckFrequencyInterval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TextViewCheckFrequencyEIns"
+              	android:layout_below="@+id/TextViewCheckFrequencyEIns"
+                android:text="@string/Check_server_notification" 
+                android:paddingBottom="10dp"
+                android:textSize="@dimen/text_size_13"
+               	android:textColor="@color/theme_gray_text_color"/>  
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:src="@drawable/arrow_right_pic" />
+
+        </RelativeLayout>
+    </LinearLayout>
+    </LinearLayout>
+ </ScrollView>   
+</RelativeLayout>

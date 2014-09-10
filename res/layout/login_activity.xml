@@ -1,0 +1,175 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+	<LinearLayout
+	    android:id="@+id/LinearLayoutLogin"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_above="@+id/RelativeLayoutServerSetting"
+	    android:orientation="vertical">
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="1"
+	        android:background="@drawable/login_logo_gradient_bg" >
+	
+	        <ImageView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_alignParentRight="true"
+	            android:background="@drawable/login_activity_logo_pic" />
+			<LinearLayout 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_alignParentBottom="true"
+			    android:layout_marginBottom="40dp"
+			    android:orientation="vertical">
+			    <TextView 
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal"
+			        android:text="@string/company_name"
+			        android:textSize="20sp"
+			        android:textColor="#394a6b"/>
+			    <TextView 
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal"
+			        android:text="@string/login_name"
+			        android:textSize="24sp"
+			        android:textColor="@color/white"/>
+			</LinearLayout>
+	    
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="20dp"
+	        android:layout_alignParentBottom="true"
+	        android:background="@drawable/login_shadow_gradient_bg" >
+	    </LinearLayout>
+	    </RelativeLayout>
+
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="1"
+	        android:orientation="vertical" >
+
+	        <EditText
+	            android:id="@+id/username"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginTop="10dp"
+	            android:background="@drawable/username_rounded_editview"
+	            android:hint="@string/usernameText"
+	            android:paddingLeft="30dp"
+	            android:textSize="15sp" />
+	
+	        <EditText
+	            android:id="@+id/password"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/username"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginTop="10dp"
+	            android:background="@drawable/passward_rounded_editview"
+	            android:hint="@string/passwordText"
+	            android:inputType="textPassword"
+	            android:paddingLeft="30dp"
+	            android:textSize="15sp" >
+	
+	            <requestFocus />
+	        </EditText>
+			<LinearLayout
+			    android:id="@+id/LinearLayoutCheckBox"
+			    android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" 
+			    android:layout_below="@+id/password"
+	            android:layout_alignLeft="@+id/password"
+	            android:layout_alignRight="@+id/password"
+	            android:layout_marginTop="10dp"
+	            android:orientation="horizontal"
+	            >
+			<CheckBox
+	            android:id="@+id/cb_pasward"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            style="@style/MyCheckBox"
+	            android:text="@string/rememberPassword"
+	            android:textSize="16sp"
+	            android:textColor="@color/theme_gray_text_color" />  
+	        <CheckBox
+	            android:id="@+id/cb_autoLogin"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            style="@style/MyCheckBox"
+	            android:textSize="16sp"
+	            android:text="@string/autoLogin"
+	            android:textColor="@color/theme_gray_text_color" /> 
+			</LinearLayout>
+	
+	        
+	         <ImageButton
+	            android:id="@+id/ImageButton_login"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/LinearLayoutCheckBox"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginTop="10dp"
+	            android:background="@drawable/login_activity_login_button"
+	            />
+	        <RadioGroup
+	            android:id="@+id/RadioGroupNetSelect"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignLeft="@+id/ImageButton_login"
+	            android:layout_alignRight="@+id/ImageButton_login"
+	            android:layout_below="@+id/ImageButton_login"
+	            android:layout_marginTop="10dp"
+	            android:orientation="horizontal" >
+	
+	            <RadioButton
+	                android:id="@+id/RadioButtonInwardNet"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                style="@style/MyRadioGroup"
+	                android:text="@string/RadioButtonInwardNet"
+	                android:textColor="@color/theme_gray_text_color" />
+	
+	            <RadioButton
+	                android:id="@+id/RadioButtonExternalNet"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                style="@style/MyRadioGroup"
+	                android:drawablePadding="10dip"
+	                android:text="@string/RadioButtonExternalNet"
+	                android:textColor="@color/theme_gray_text_color" />
+	
+	        </RadioGroup>
+	
+	    </RelativeLayout>
+	</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutServerSetting"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp" 
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/login_setting_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/server_ip_settings"
+            android:textColor="@color/transparent_gray"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

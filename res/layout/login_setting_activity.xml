@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white" >
+	<RelativeLayout
+        android:id="@+id/LinearLayoutSetting"
+        android:layout_width="fill_parent"
+        android:layout_height="80dip"
+        android:background="@color/theme_blue_color">
+
+        <ImageButton
+            android:id="@+id/login_setting_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/theme_blue_color"
+            android:padding="10.0dip"
+            android:src="@drawable/setting_activity_back_button" />
+        <TextView
+            android:id="@+id/settingActivity_actionbar_title_Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/server_ip_settings"
+            android:textColor="@color/theme_blue_option_color"
+            android:textSize="23sp" />
+    </RelativeLayout>
+	<LinearLayout 
+	    android:id="@+id/settingActivity_optionsBar"
+	    android:layout_height="20dp"
+	    android:layout_marginTop="1px"
+	    android:layout_width="fill_parent"
+	    android:orientation="horizontal"
+	    android:layout_below="@+id/LinearLayoutSetting"
+	    android:background="@color/theme_blue_option_color">
+	    
+	</LinearLayout>
+    <LinearLayout
+        android:id="@+id/external_ip_LinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/settingActivity_optionsBar"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/external_ip_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/external_server_IP_title"
+            android:textSize="19sp"
+            android:textColor="@color/theme_gray_text_color" />
+
+        <EditText
+            android:id="@+id/external_ip_editview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:paddingLeft="5dp"
+            android:background="@drawable/setting_avtivity_editview_edge"
+            android:ems="10"
+            android:textColor="@color/theme_gray_text_color" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/inward_ip_LinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/external_ip_LinearLayout"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/inward_ip_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/inward_server_IP_title"
+            android:textSize="19sp"
+            android:textColor="@color/theme_gray_text_color" />
+
+        <EditText
+            android:id="@+id/inward_ip_editview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:paddingLeft="5dp"
+            android:background="@drawable/setting_avtivity_editview_edge"
+            android:ems="10" 
+            android:textColor="@color/theme_gray_text_color">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inward_ip_LinearLayout"
+        android:layout_marginTop="20dp" >
+
+        <ImageButton
+            android:id="@+id/login_setting_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/setting_activity_finish_button"
+             />
+    </RelativeLayout>
+
+</RelativeLayout>

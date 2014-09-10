@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/theme_blue_color"
+    android:orientation="horizontal"
+    android:paddingBottom="7dip"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingTop="8dip" >
+    <ImageButton
+    	android:id="@+id/ImageButtonDevdetailHeaderBack"
+  		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="10.0dip"
+		android:background="@color/theme_blue_color"
+		android:src="@drawable/setting_activity_back_button"/>
+    
+    <ImageView
+        android:id="@+id/listitem_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:singleLine="true" >
+
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dip"
+	            android:layout_gravity="center_vertical"
+	            android:layout_weight="1"
+	            android:text="@string/header_tittle_dev_detail"
+	            android:textColor="@color/white"
+	            android:textSize="@dimen/deviceDetailTitleSise" />
+            <RelativeLayout 
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+                <ImageButton
+			        android:id="@+id/ImageButtonDevdetailHeaderRefresh"
+			  		android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:background="@color/theme_blue_color"
+					android:src="@drawable/refresh_button"
+					android:visibility="visible"
+					/>
+
+				<ProgressBar
+				    android:id="@+id/ProgressBarDevDetail"
+				    style="?android:attr/progressBarStyleSmall"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_centerInParent="true"
+				    android:visibility="invisible" />
+
+			</RelativeLayout>
+        </LinearLayout>
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:singleLine="true"
+                android:text="@string/device_description"
+                android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		    <TextView
+	            android:id="@+id/device_info_description"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:singleLine="true"
+	            android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		</LinearLayout>
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+		    <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:singleLine="true"
+                android:text="@string/device_info_location_tittle"
+                android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		    <TextView
+	            android:id="@+id/device_info_location"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:singleLine="true"
+	            android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		</LinearLayout>
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+		    <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:singleLine="true"
+                android:text="@string/device_info_boundary_tittile"
+                android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		    <TextView
+	            android:id="@+id/device_info_boundary"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:singleLine="true"
+	            android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		</LinearLayout>
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+		    <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:singleLine="true"
+                android:text="@string/device_sn"
+                android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		    <TextView
+	            android:id="@+id/device_info_sn"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/theme_blue_option_color"
+	            android:textSize="@dimen/deviceDetailContentSise" />
+		</LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

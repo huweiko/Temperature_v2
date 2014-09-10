@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DevDetailActivity" >
+
+    <include layout="@layout/dev_detail_header" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/theme_blue_option_color" >
+			<TextView 
+			    android:layout_width="0dp"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"/>
+            <ImageButton
+                android:id="@+id/history_curve_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/device_detail_curve_button"
+                android:background="@color/theme_blue_option_color"/>
+
+            <ImageButton
+                android:id="@+id/history_date_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_gravity="center"
+				android:src="@drawable/device_detail_list_button"
+                android:background="@color/theme_blue_option_color"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <com.refeved.monitor.custom.CustomViewPager
+                android:id="@+id/dev_detail_pager"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:context=".DevDetailActivity" >
+            </com.refeved.monitor.custom.CustomViewPager>
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

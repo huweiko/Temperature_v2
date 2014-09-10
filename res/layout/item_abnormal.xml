@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutAlarmStatusChart"
+        android:layout_width="@dimen/abnormalDevItemSize"
+        android:layout_height="@dimen/abnormalDevItemSize" />
+	<TextView 
+	    android:id="@+id/TextViewAbnormalDevName"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:singleLine="true"
+	    android:gravity="center"
+	    android:text="A30"
+	    android:textSize="14sp"
+	    android:textColor="@color/black"/>
+</LinearLayout>

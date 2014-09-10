@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <include
+        android:id="@+id/bd_show_detail_log"
+        layout="@layout/dev_abnormal_log_listitem"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/bd_show_deal_log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <TextView
+                android:id="@+id/device_deallog_description"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/theme_blue_option_color"
+                android:singleLine="true"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/device_deallog_description"
+                android:layout_alignBottom="@id/device_deallog_description"
+                android:layout_marginLeft="1px"
+                android:layout_toRightOf="@+id/device_deallog_description"
+                android:background="@color/theme_blue_option_color" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/log_start_pic" />
+
+            <TextView
+                android:id="@+id/device_deallog_startuser"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:singleLine="true"
+                android:textColor="@color/theme_blue_option_color"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/device_deallog_startdes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:singleLine="true"
+                android:layout_marginLeft="5dip"
+                android:textColor="@color/theme_gray_text_color"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/device_deallog_starttime"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_marginRight="5dip"
+                android:gravity="right"
+                android:textColor="@color/theme_gray_text_color"
+                android:textSize="@dimen/text_size_13" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/log_stop_pic" />
+
+            <TextView
+                android:id="@+id/device_deallog_enduser"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_marginLeft="5dip"
+                android:textColor="@color/theme_blue_option_color"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/device_deallog_enddes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:singleLine="true"
+                android:layout_marginLeft="5dip"
+                android:textColor="@color/theme_gray_text_color"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/device_deallog_endtime"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_marginRight="5dip"
+                android:gravity="right"
+                android:textColor="@color/theme_gray_text_color"
+                android:textSize="@dimen/text_size_13" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
