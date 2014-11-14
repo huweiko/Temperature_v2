@@ -1,6 +1,5 @@
 package com.refeved.monitor.ui;
 
-import com.refeved.monitor.AppManager;
 import com.refeved.monitor.R;
 import android.app.AlertDialog;
 import android.app.Dialog;

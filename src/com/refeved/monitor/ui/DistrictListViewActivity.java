@@ -122,7 +122,7 @@ public class DistrictListViewActivity extends BaseActivity implements
 						}
 					}
 					
-			}
+				}
 			
 			}		
 		}
@@ -141,18 +141,6 @@ public class DistrictListViewActivity extends BaseActivity implements
 		}
 		rootTreeNode = new TreeNode(null, "root", "Node_0", false,
 				new ArrayList<TreeNode>());
-		//initTree();
-		//lvTreeNodeData.add(rootTreeNode);
-
-//		mHeaderHome.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				UIHealper.showHome(DistrictListViewActivity.this);
-//			}
-//
-//		});
 
 		mDistrictListViewAdapter = new DistrictListViewAdapter(this,
 				lvTreeNodeData);
@@ -198,7 +186,15 @@ public class DistrictListViewActivity extends BaseActivity implements
 		IntentFilter filter = new IntentFilter();
 	    filter.addAction(WebClient.INTERNAL_ACTION_GETAREAMAPDONE);
 	    appContext.registerReceiver(receiver, filter);
-	    onDevListUpdate();
+	    if(MainActivity.lvReserveTreeNodeData == null){
+	    	onDevListUpdate();
+	    }else{
+	    	lvTreeNodeData.clear();
+	    	lvTreeNodeData.addAll(MainActivity.lvReserveTreeNodeData);
+			mDistrictListViewAdapter.setListItems(MainActivity.lvReserveTreeNodeData);
+			mDistrictListViewAdapter.notifyDataSetChanged();
+	    }
+	    
 //	    int taskID = this.getTaskId();
 //		UIHealper.DisplayToast(appContext, "taskID = "+taskID);
 	}
@@ -213,10 +209,7 @@ public class DistrictListViewActivity extends BaseActivity implements
 	public void onRepeat(View v, long duration, int repeatcount) {
 		// TODO Auto-generated method stub
 		if (repeatcount == 0) {
-//			String id = v.getTag(R.id.button_tag_index1).toString();
 			TreeNode node = (TreeNode) v.getTag();
-//			UIHealper.DisplayToast(appContext, " double click = " + id
-//					+ node.getmName());
 
             Intent intent = new Intent();
             intent.putExtra("AID", node.getmId());
@@ -260,6 +253,7 @@ public class DistrictListViewActivity extends BaseActivity implements
 		}
 		lvTreeNodeData = list;
 		lvTreeNodeData.add(node);
+		MainActivity.lvReserveTreeNodeData = lvTreeNodeData;
 		mDistrictListViewAdapter.setListItems(lvTreeNodeData);
 		mDistrictListViewAdapter.notifyDataSetChanged();
 //		UIHealper.DisplayToast(appContext, node.getmName());

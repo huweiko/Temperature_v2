@@ -60,6 +60,7 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 	Boolean visiable = false;
 	static String DevDetailMacID;
 	public static String mDeviceType = null;
+	public static double[] WarningLine = {-70.0,-90.0}; 
 	ImageButton mHistoryCurveMenu;
 	ImageButton mHistoryDateMenu;
 	ImageButton mImageButtonDevdetailHeaderBack;
@@ -303,6 +304,8 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 		
 		textView= (TextView)findViewById(R.id.device_info_boundary);
 		textView.setText(dev.getmLow()+" to "+dev.getmHigh());
+		WarningLine[0] = Double.parseDouble(dev.getmHigh());
+		WarningLine[1] = Double.parseDouble(dev.getmLow());
 		
 		textView= (TextView)findViewById(R.id.device_info_sn);
 		textView.setText(dev.getmSn());

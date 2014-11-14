@@ -9,13 +9,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 import org.jdom2.Document;
@@ -46,6 +46,7 @@ import com.refeved.monitor.AppContext;
 import com.refeved.monitor.R;
 import com.refeved.monitor.UIHealper;
 import com.refeved.monitor.net.WebClient;
+import com.refeved.monitor.struct.Device;
 import com.refeved.monitor.struct.DeviceLog;
 import com.refeved.monitor.util.DimenUtils;
 public class DevDetailHistoryCurveFragment extends Fragment implements OnClickListener{
@@ -53,8 +54,6 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 	private List<DeviceLog> lvLogDataWeek = new ArrayList<DeviceLog>();
 	private List<DeviceLog> lvLogDataMonth = new ArrayList<DeviceLog>();
     private GraphicalView chart;
-    private int addY = -1;
-	private long addX;
 	/**曲线数量*/
     private static final String TAG = "message";
 	protected static final int HANDLER_DOMBUILD_XML = 1;
@@ -62,9 +61,6 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 	private static final int CLICK_BUTTONMONTH_CURVE = 1;
 	private static final int WEEKSTYLE = 1;
 	private static final int MONTHSTYLE = 2;
-    private TimeSeries series1;
-    private XYMultipleSeriesDataset dataset1;
-    private Random random=new Random();
     /**时间数据*/
     Date[] xcache = new Date[20];
 	/**数据*/
@@ -100,7 +96,10 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 							parseGetByAidXml(rootElement, lvLogDataWeek);
 							Double [] date = new Double[2];
 							if(getMaxMinValue(lvLogDataWeek,date) == 0){
+								date[0] = (date[0]>DevDetailActivity.WarningLine[0]?date[0]:DevDetailActivity.WarningLine[0]);
+								date[1] = (date[1]<DevDetailActivity.WarningLine[1]?date[1]:DevDetailActivity.WarningLine[1]);
 								chart = ChartFactory.getTimeChartView(appContext, getDateDemoDataset(lvLogDataWeek), getDemoRenderer(date[0]+10.0d,date[1] - 10.0d), "yyyy-MM-dd");
+							
 							}else{
 								Log.i("huwei", "本周没有数据");
 							}
@@ -108,7 +107,10 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 						else{
 							parseGetByAidXml(rootElement, lvLogDataMonth);	
 							Double [] date = new Double[2];
+							
 							if(getMaxMinValue(lvLogDataMonth,date) == 0){
+								date[0] = (date[0]>DevDetailActivity.WarningLine[0]?date[0]:DevDetailActivity.WarningLine[0]);
+								date[1] = (date[1]<DevDetailActivity.WarningLine[1]?date[1]:DevDetailActivity.WarningLine[1]);
 								chart = ChartFactory.getTimeChartView(appContext, getDateDemoDataset(lvLogDataMonth), getDemoRenderer(date[0]+10.0d,date[1] - 10.0d), "yyyy-MM-dd");
 							}else{
 								Log.i("huwei", "本月没有数据");
@@ -139,6 +141,7 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 //			Log.i("huwei", LogPrint.CML() + resXml);
 			if(intent.getAction().equals(WebClient.INTERNAL_ACTION_GETAVGVAL))
 			{
+				Log.i("huwei", "收到曲线数据");
 				mLoadingView.setVisibility(View.GONE);
 				if(resXml != null)
 				{
@@ -234,12 +237,12 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 	@Override
 	public void onActivityCreated (Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
-		dataset1 = new XYMultipleSeriesDataset();
-		series1 = new TimeSeries("Demo series ");
+
 		onDevLogListupdate(WebClient.Method_getAvgVal,GetCurveTimeInterval(WEEKSTYLE));
 	}
 	@SuppressLint("SimpleDateFormat")
 	private void onDevLogListupdate(String logMethod ,Map<String, String> param) {
+		Log.i("huwei", "开始获取曲线数据");
 		mLoadingView.setVisibility(View.VISIBLE);
 		WebClient client = WebClient.getInstance(appContext);
 		client.sendMessage(appContext, logMethod, param);
@@ -267,67 +270,56 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 		param.put("ENDTIME", endTime);
 		return param;
 	}
-   @SuppressWarnings("unused")
-   private void updateChart() {
-	    //设定长度为20
-	    int length = series1.getItemCount();
-	    if(length>=20) length = 20;
-	    addY=random.nextInt()%10;
-	    addX=new Date().getTime();
-	    
-	    //将前面的点放入缓存
-		for (int i = 0; i < length; i++) {
-			xcache[i] =  new Date((long)series1.getX(i));
-			ycache[i] = (int) series1.getY(i);
-		}
-	    
-		series1.clear();
-		//将新产生的点首先加入到点集中，然后在循环体中将坐标变换后的一系列点都重新加入到点集中
-		//这里可以试验一下把顺序颠倒过来是什么效果，即先运行循环体，再添加新产生的点
-		series1.add(new Date(addX), addY);
-		for (int k = 0; k < length; k++) {
-    		series1.add(xcache[k], ycache[k]);
-    	}
-		//在数据集中添加新的点集
-		dataset1.removeSeries(series1);
-		dataset1.addSeries(series1);
-		//曲线更新
-		chart.invalidate();
-    }
 	/**
 	 * 设定如表样式
 	 * @return
 	 */
 	   private XYMultipleSeriesRenderer getDemoRenderer(double YAxisMax,double YAxisMin) {
 		    XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+		    renderer.setXTitle("时间");
+		    if(DevDetailActivity.mDeviceType.equals(Device.Type_Frige)){
+		    	renderer.setYTitle("温度（℃）");
+		    }else if(DevDetailActivity.mDeviceType.equals(Device.Type_Humidity)){
+		    	renderer.setYTitle("湿度（%）");
+		    }
+		    
 		    renderer.setGridColor(getResources().getColor(R.color.theme_blue_option_color)); //设置方格颜色
 		    renderer.setChartTitleTextSize(DimenUtils.sp2px(appContext, 15));
-//		    renderer.setXTitle("时间");    //x轴说明
-//		    renderer.setAxisTitleTextSize(16);
 		    renderer.setAxesColor(getResources().getColor(R.color.theme_blue_color));
 		    renderer.setLabelsTextSize(DimenUtils.sp2px(appContext, 12));    //数轴刻度字体大小
 		    renderer.setLabelsColor(getResources().getColor(R.color.theme_blue_color));
 		    renderer.setLegendTextSize(15);    //曲线说明
 		    renderer.setXLabelsColor(getResources().getColor(R.color.theme_blue_color));
 		    renderer.setYLabelsColor(0,getResources().getColor(R.color.theme_blue_color));
-		    renderer.setShowLegend(false);
-		    renderer.setMargins(new int[] {20, 30, 100, 0});
-		    XYSeriesRenderer r = new XYSeriesRenderer();
-		    r.setColor(Color.GREEN);
-		    r.setChartValuesTextSize(15);
-		    r.setChartValuesSpacing(3);
-		    r.setPointStyle(PointStyle.CIRCLE);
-		    r.setLineWidth(getResources().getDimension(R.dimen.curveLineWidth));
-		    r.setFillBelowLine(true);
-		    r.setFillBelowLineColor(mBackColor);
-		    r.setFillPoints(true);
-		    renderer.addSeriesRenderer(r);
+		    renderer.setShowLegend(true);//开启曲线说明
+		    renderer.setZoomEnabled(false);//不允许缩放
+		    renderer.setPanEnabled(false);//不允许移动
+		    renderer.setClickEnabled(false);
+		    renderer.setMargins(new int[] {20, 30, 80, 20});
+		    int[] colorValue = {Color.GREEN,Color.RED,Color.RED};
+		    float[] FontSize = {3,2,2};
+		    BasicStroke[] LineType = {BasicStroke.SOLID,BasicStroke.SOLID,BasicStroke.SOLID};
+		    PointStyle[] PointType = {PointStyle.CIRCLE,PointStyle.POINT,PointStyle.POINT};
+		    for(int i = 0;i < 3;i++){
+			    XYSeriesRenderer r = new XYSeriesRenderer();
+			    r.setColor(colorValue[i]);
+			    r.setChartValuesTextSize(15);
+			    r.setChartValuesSpacing(3);
+			    r.setPointStyle(PointType[i]);
+			    r.setLineWidth(FontSize[i]);
+			    r.setFillBelowLine(true);
+			    r.setFillBelowLineColor(mBackColor);
+			    r.setFillPoints(true);
+			    r.setStroke(LineType[i]);
+			    renderer.addSeriesRenderer(r);
+		    }
+
 		    renderer.setMarginsColor(getResources().getColor(R.color.white));
 		    renderer.setShowGrid(true);
 		    renderer.setYAxisMax(YAxisMax);
 		    renderer.setYAxisMin(YAxisMin);
-		    renderer.setInScroll(true);  //调整大小
-		    renderer.setZoomButtonsVisible(true);
+		    renderer.setInScroll(false);  //调整大小
+
 		    return renderer;
 		  }
 	   /**
@@ -337,7 +329,10 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 	   @SuppressLint("SimpleDateFormat")
 	private XYMultipleSeriesDataset getDateDemoDataset(List<DeviceLog> xDeviceLog) {
 
-			series1.clear();
+		    XYMultipleSeriesDataset dataset1 = new XYMultipleSeriesDataset();
+			TimeSeries series1 = new TimeSeries(getString(R.string.Curve_avarageValue));
+			TimeSeries SeriesAbove = new TimeSeries(getString(R.string.Curve_cordon_above));
+			TimeSeries SeriesBelow= new TimeSeries(getString(R.string.Curve_cordon_below));
 			SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			for (int k = 0; k < xDeviceLog.size(); k++) {
 				String Tem = xDeviceLog.get(k).getmTemperature();
@@ -346,6 +341,8 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 					try {
 						Date date = mSimpleDateFormat.parse(xDeviceLog.get(k).getmTime());
 						series1.add(date,f);
+						SeriesAbove.add(date,DevDetailActivity.WarningLine[0]);
+						SeriesBelow.add(date,DevDetailActivity.WarningLine[1]);
 						Log.i("huwei", "date = "+mSimpleDateFormat.format(date) + "tem = "+f);
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
@@ -354,8 +351,9 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 				}
 //				Log.i("huwei", k+" = "+Tem);
 			}
-			dataset1.removeSeries(series1);
 			dataset1.addSeries(series1);
+			dataset1.addSeries(SeriesAbove);
+			dataset1.addSeries(SeriesBelow);
 			
 			Log.i(TAG, dataset1.toString());
 			return dataset1;
@@ -378,6 +376,8 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 				mButtonMonthCurve.setTextColor(getResources().getColor(R.color.theme_gray_text_color));
 				Double [] date = new Double[2];
 				if(getMaxMinValue(lvLogDataWeek,date) == 0){
+					date[0] = (date[0]>DevDetailActivity.WarningLine[0]?date[0]:DevDetailActivity.WarningLine[0]);
+					date[1] = (date[1]<DevDetailActivity.WarningLine[1]?date[1]:DevDetailActivity.WarningLine[1]);
 					chart = ChartFactory.getTimeChartView(appContext, getDateDemoDataset(lvLogDataWeek), getDemoRenderer(date[0]+10.0d,date[1] - 10.0d), "yyyy-MM-dd");
 					layout.addView(chart, new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 				}else{
@@ -398,6 +398,8 @@ public class DevDetailHistoryCurveFragment extends Fragment implements OnClickLi
 				else{
 					Double [] date = new Double[2];
 					if(getMaxMinValue(lvLogDataMonth,date) == 0){
+						date[0] = (date[0]>DevDetailActivity.WarningLine[0]?date[0]:DevDetailActivity.WarningLine[0]);
+						date[1] = (date[1]<DevDetailActivity.WarningLine[1]?date[1]:DevDetailActivity.WarningLine[1]);
 						chart = ChartFactory.getTimeChartView(appContext, getDateDemoDataset(lvLogDataMonth), getDemoRenderer(date[0]+10.0d,date[1] - 10.0d), "yyyy-MM-dd");
 						layout.addView(chart, new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));	
 					}else{

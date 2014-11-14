@@ -149,7 +149,7 @@ public class WebClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}//测试是否可以达到该地址
-		Log.v("huwei", "mCurrentServerIP = "+WebClient.mCurrentServerIP);
+		Log.d("huwei", "mCurrentServerIP = "+WebClient.mCurrentServerIP);
 		return state;
 	}
 	public class CheckThread  extends Thread{
@@ -262,7 +262,7 @@ public class WebClient {
 			else if(mMethod.equals(Method_setHandleStatus)){
 				action = INTERNAL_ACTION_SETHANDLESTATUS;
 			}
-			Log.i("huwei---"+LogPrint.CML(), action);
+			Log.d("huwei---"+LogPrint.CML(), action);
 			Intent intent = new Intent(action);
 			intent.putExtra(WebClient.Param_resXml, result);
 			mContext.sendBroadcast(intent);
@@ -412,7 +412,7 @@ public class WebClient {
                 	if(entry.getKey().equals("MACID"))
                 	{
                 		SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                		Log.i("huwei",mSimpleDateFormat.format(new Date()));
+                		Log.d("huwei",mSimpleDateFormat.format(new Date()));
                 		Xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><root><machine><id>"+entry.getValue()+"</id></machine><startTime>"+mSimpleDateFormat.format(new Date())+"</startTime></root>";
                 	}
                 }
@@ -514,7 +514,7 @@ public class WebClient {
             soapReq.addProperty(Param_SendXml,Xml);
             soapEnvelope.setOutputSoapObject(soapReq);
             HttpTransportSE httpTransport = new HttpTransportSE(Url,timeOut);
-            Log.i("huwei", "Url = "+Url);
+            Log.d("huwei", "Url = "+Url);
             try{
                 httpTransport.call(ServiceNameSpace+"/"+method, soapEnvelope);
                 Object retObj = soapEnvelope.bodyIn;

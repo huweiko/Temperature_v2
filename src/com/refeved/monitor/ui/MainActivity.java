@@ -10,16 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
-
 import com.refeved.monitor.achartengine.BudgetDoughnutChart;
 import com.refeved.monitor.adapter.DevListViewAdapter;
 import com.refeved.monitor.adapter.GridAdapter;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.xml.sax.InputSource;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -43,7 +40,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -52,7 +48,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.refeved.monitor.AppContext;
 import com.refeved.monitor.AppManager;
 import com.refeved.monitor.R;
@@ -124,7 +119,6 @@ public class MainActivity extends BaseActivity implements
 	
 	private ImageView mImageButtonMainAvtivityRefresh;
 	
-	
 	private ProgressBar mProgressBarMainAvtivity;
 	private Dialog noticeDialog;
 	private RelativeLayout mRelativeLayoutCoolerNodeGrid;
@@ -132,6 +126,7 @@ public class MainActivity extends BaseActivity implements
 	private FragmentManager mFragmentManager = null;
 	private boolean mIsOnlyShowAbnormalDeviceStatus = false;
 	
+	public static List<TreeNode> lvReserveTreeNodeData = null;
 	private AreaTreeNode mAreaTreeNode = null;
 	class CheckQuitThread extends Thread {
 		@Override
@@ -335,9 +330,9 @@ public class MainActivity extends BaseActivity implements
 		mMenuMore.setOnClickListener(this);
 		mMenuMore.setTag(CLICK_MORE_BUTTON);
 		if(mIsOnlyShowAbnormalDeviceStatus){
-			mTextViewdangqian.setText("异常设备统计：");
+			mTextViewdangqian.setText("异常设备统计");
 		}else{
-			mTextViewdangqian.setText("全部设备统计：");
+			mTextViewdangqian.setText("全部设备统计");
 		}
 		
 		mDevListViewAdapter = new DevListViewAdapter(appContext, new ArrayList<AreaTreeNode>(), R.layout.surveil_fragment_gridview);
@@ -899,7 +894,7 @@ public class MainActivity extends BaseActivity implements
 				AreaTreeNode DeviceRoom = new AreaTreeNode(null, null, xDevices.get(0).getmLocation(), true, null, xDevices);
 				list.add(DeviceRoom);
 				for(int i = 0;i < xDevices.size();i++){
-					xDevices.get(i).getmStatus();
+		/*			xDevices.get(i).getmStatus();
 					//判断是否为冷库设备
 					if(Integer.parseInt(xDevices.get(i).getmEnvironmentType()) == Device.Temperature_Cooler){
 						
@@ -929,7 +924,7 @@ public class MainActivity extends BaseActivity implements
 								k++;
 							}
 						}
-					}else{
+					}else{*/
 						int Istatus = Integer.parseInt(xDevices.get(i).getmStatus());
 						if(Istatus == 0x01){
 							mDeviceNormalNum ++;
@@ -944,7 +939,7 @@ public class MainActivity extends BaseActivity implements
 						else{
 							mDeviceOtherNum++;
 						}
-					}
+//					}
 
 				}
 			}
@@ -1066,9 +1061,9 @@ public class MainActivity extends BaseActivity implements
 		updateListView(lvDevData);
 		HandlerSendMessage(HANDLER_UPDATE_DEV_COUNT,-1);
 		if(mIsOnlyShowAbnormalDeviceStatus){
-			mTextViewdangqian.setText("异常设备统计：");
+			mTextViewdangqian.setText("异常设备统计");
 		}else{
-			mTextViewdangqian.setText("全部设备统计：");
+			mTextViewdangqian.setText("全部设备统计");
 		}
 	}
 }

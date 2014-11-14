@@ -89,7 +89,12 @@ public class DevLogListViewAdapter extends BaseAdapter {
 				listItemView.Temperature.setText(deviceLog.getmTemperature()+"%");
 			}
 		}
-
+		Double Temperature = Double.parseDouble(deviceLog.getmTemperature());
+		if((Temperature<DevDetailActivity.WarningLine[0]) && (Temperature>DevDetailActivity.WarningLine[1])){
+			listItemView.Temperature.setTextColor(context.getResources().getColor(R.color.theme_blue_color));
+		}else{
+			listItemView.Temperature.setTextColor(context.getResources().getColor(R.color.red));
+		}
 		String strtime = deviceLog.getmTime();
 		String [] sp = strtime.split(" ");
 		listItemView.time_yymmdd.setText(sp[0]);

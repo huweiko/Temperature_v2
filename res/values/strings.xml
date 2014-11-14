@@ -182,6 +182,10 @@
    
     
     <string name="device_environmentType">environmentType</string>
+    
+    <string name="Curve_avarageValue">日平均值</string>
+    <string name="Curve_cordon_above">上限</string>
+    <string name="Curve_cordon_below">下限</string>
    
     
 </resources>
