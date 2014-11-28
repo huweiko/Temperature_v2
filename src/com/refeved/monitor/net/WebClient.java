@@ -51,6 +51,8 @@ public class WebClient {
 	public static final String INTERNAL_ACTION_GETVERSIONINFO="com.refeved.monitor.net.broadcast.GETVERSIONINFO";
 	//设置处理信息
 	public static final String INTERNAL_ACTION_SETHANDLESTATUS="com.refeved.monitor.net.broadcast.SETHANDLESTATUS";
+	//获取样本库描述信息
+	public static final String INTERNAL_ACTION_GETSPECIMENMACHINEMACDES="com.refeved.monitor.net.broadcast.GETSPECIMENMACHINEMACDES";
 	
 	
 	private final static WebClient mInstance = new WebClient();
@@ -89,7 +91,8 @@ public class WebClient {
 	public static final String Method_getVersionInfo = "getVersion";
 	//设置处理信息
 	public static final String Method_setHandleStatus = "setHandleStatus";
-	
+	//获取样本库描述信息
+	public static final String Method_getSpecimenMachineMacdes = "getSpecimenMachineMacdes";
 	/*
 	 * 请求URL
 	*/ 
@@ -262,7 +265,13 @@ public class WebClient {
 			else if(mMethod.equals(Method_setHandleStatus)){
 				action = INTERNAL_ACTION_SETHANDLESTATUS;
 			}
-			Log.d("huwei---"+LogPrint.CML(), action);
+			else if(mMethod.equals(Method_getSpecimenMachineMacdes)){
+				action = INTERNAL_ACTION_GETSPECIMENMACHINEMACDES;
+			}
+			if(action != null){
+				Log.d("huwei---"+LogPrint.CML(), action);
+			}
+			
 			Intent intent = new Intent(action);
 			intent.putExtra(WebClient.Param_resXml, result);
 			mContext.sendBroadcast(intent);
@@ -491,6 +500,18 @@ public class WebClient {
                     }
                     Xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <root><macid>"+macid+"</macid><startUserID>"+startUserID+"</startUserID><endUserID>"+endUserID+"</endUserID><startTime>"+startTime+"</startTime><endTime>"+endTime+"</endTime><startDes>"+startDes+"</startDes><endDes>"+endDes+"</endDes></root>";
                     Url = URL_MONTITORAPI;
+                }
+			}
+			else if(method.equals(Method_getSpecimenMachineMacdes)){
+				Url = URL_OTHERAPI;
+            	Iterator<Entry<String, String>> it= param.entrySet().iterator();
+                while(it.hasNext())
+                {
+                	Entry<String, String> entry = it.next();   
+                	if(entry.getKey().equals("MACID"))
+                	{
+                		Xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><root><macid>"+entry.getValue()+"</macid></root>";
+                	}
                 }
 			}
 			

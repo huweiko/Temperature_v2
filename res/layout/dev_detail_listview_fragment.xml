@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dev_detail_listview"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingBottom="7dip"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingTop="8dip" >
+    <RelativeLayout 
+     	android:id="@+id/RelativeLayoutDevDetailEmptyShow"
+        android:gravity="center" 
+        android:layout_width="fill_parent"  
+        android:layout_height="fill_parent"
+        android:visibility="gone">
+    	<TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:text="@string/no_received_data"
+	        android:textSize="20sp"
+	        android:textColor="@color/theme_gray_text_color" />  
+ 	</RelativeLayout>
+	<ListView
+	    android:id="@+id/dev_detail_listview"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" >
+	</ListView>
 
-</ListView>
+</RelativeLayout>

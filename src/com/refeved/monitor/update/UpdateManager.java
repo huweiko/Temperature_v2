@@ -27,11 +27,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-/**
- *@author coolszy
- *@date 2012-4-26
- *@blog http://blog.92coding.com
- */
 
 public class UpdateManager
 {

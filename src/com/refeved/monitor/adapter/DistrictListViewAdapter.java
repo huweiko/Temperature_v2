@@ -90,7 +90,7 @@ public class DistrictListViewAdapter extends BaseAdapter {
 			button.setGravity(Gravity.CENTER_HORIZONTAL);
 			if(items.get(count).ismIsOpen()){
 				if(items.get(count).getmChildren().size()>0)//对没有子房间的节点不变化背景色
-					button.setBackgroundResource(R.drawable.district_button_on);
+					button.setBackgroundResource(R.drawable.round_button_on);
 			}
 			button.setTag(items.get(count));
 			count++;

@@ -52,8 +52,9 @@ import com.refeved.monitor.struct.TreeNode;
 public class DevDetailActivity extends BaseActivity implements OnClickListener {
 	private static final int CLICK_HISTORY_CURVE = 0;
 	private static final int CLICK_HISTORY_DATE = 1;
-	private static final int CLICK_HISTORY_BACK = 2;
-	private static final int CLICK_HISTORY_REFRESH = 3;
+	private static final int CLICK_SPECIMEN_INFO = 2;
+	private static final int CLICK_HISTORY_BACK = 3;
+	private static final int CLICK_HISTORY_REFRESH = 4;
 	
 	AppContext appContext;
 	int count = 5;
@@ -63,6 +64,7 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 	public static double[] WarningLine = {-70.0,-90.0}; 
 	ImageButton mHistoryCurveMenu;
 	ImageButton mHistoryDateMenu;
+	ImageButton mSpecimenInfoMenu;
 	ImageButton mImageButtonDevdetailHeaderBack;
 	ImageButton mImageButtonDevdetailHeaderRefresh;
 	ProgressBar mProgressBarDevDetail;
@@ -178,7 +180,8 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 					
 				}
 
-			}		
+			}	
+			
 		}
 	};
 
@@ -197,6 +200,10 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 		mHistoryDateMenu.setOnClickListener(this);
 		mHistoryDateMenu.setTag(CLICK_HISTORY_DATE);
 		
+		mSpecimenInfoMenu = (ImageButton) findViewById(R.id.specimen_info_menu);
+		mSpecimenInfoMenu.setOnClickListener(this);
+		mSpecimenInfoMenu.setTag(CLICK_SPECIMEN_INFO);
+		
 		mImageButtonDevdetailHeaderBack = (ImageButton) findViewById(R.id.ImageButtonDevdetailHeaderBack);
 		mImageButtonDevdetailHeaderBack.setOnClickListener(this);
 		mImageButtonDevdetailHeaderBack.setTag(CLICK_HISTORY_BACK);
@@ -213,12 +220,12 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 
 		onDevInfoUpdate();
 
-		
 		mSectionsPagerAdapter = new DevDetailPagerAdapter(getSupportFragmentManager());
 
 		mViewPager = (CustomViewPager) findViewById(R.id.dev_detail_pager);
-		mViewPager.setOffscreenPageLimit(2);
+		mViewPager.setOffscreenPageLimit(3);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setCurrentItem(1);
 		mViewPager.requestDisallowInterceptTouchEvent(true);
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(WebClient.INTERNAL_ACTION_GETBYMACID);
@@ -231,10 +238,13 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 		int tag = (Integer) v.getTag();
 		switch (tag)
 		{
-			case CLICK_HISTORY_CURVE:
+			case CLICK_SPECIMEN_INFO:
 				mViewPager.setCurrentItem(0);break;
-			case CLICK_HISTORY_DATE:
+			case CLICK_HISTORY_CURVE:
 				mViewPager.setCurrentItem(1);break;
+			case CLICK_HISTORY_DATE:
+				mViewPager.setCurrentItem(2);break;
+			
 			case CLICK_HISTORY_BACK:
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
@@ -250,23 +260,30 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 	private class DevDetailPagerAdapter extends FragmentPagerAdapter {
 		DevDetailHistoryCurveFragment mDevDetailHistoryCurveFragment;
 		DevDetailHistoryListFragment mDevDetailHistoryListFragment;
+		DevSpecimenListFragment mDevSpecimenListFragment;
 		public DevDetailPagerAdapter(FragmentManager fm) {
 			super(fm);
 			mDevDetailHistoryCurveFragment = null;
 			mDevDetailHistoryListFragment = null;
+			mDevSpecimenListFragment = null;
 		}
 
 		@Override
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
+				if (mDevSpecimenListFragment == null)
+					mDevSpecimenListFragment = new DevSpecimenListFragment();
+				return mDevSpecimenListFragment;
+			case 1:
 				if (mDevDetailHistoryCurveFragment == null)
 					mDevDetailHistoryCurveFragment = new DevDetailHistoryCurveFragment();
 				return mDevDetailHistoryCurveFragment;
-			case 1:
+			case 2:
 				if (mDevDetailHistoryListFragment == null)
 					mDevDetailHistoryListFragment = new DevDetailHistoryListFragment();
 				return mDevDetailHistoryListFragment;
+
 			}
 			return null;
 		}
@@ -274,7 +291,7 @@ public class DevDetailActivity extends BaseActivity implements OnClickListener {
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 2;
+			return 3;
 		}
 	}
 	@Override

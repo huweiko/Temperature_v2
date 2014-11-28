@@ -28,17 +28,17 @@ import android.widget.ListView;
 import com.refeved.monitor.AppContext;
 import com.refeved.monitor.R;
 import com.refeved.monitor.UIHealper;
-import com.refeved.monitor.adapter.DevLogListViewAdapter;
+import com.refeved.monitor.adapter.DevSpecimenListViewAdapter;
 import com.refeved.monitor.net.WebClient;
-import com.refeved.monitor.struct.DeviceLog;
+import com.refeved.monitor.struct.SpecimenInfo;
 
-public class DevDetailHistoryListFragment extends Fragment{
+public class DevSpecimenListFragment extends Fragment{
 	
-	protected static final int HANDLER_DOMBUILD_XML = 0;
-	private ListView mListViewLogs;
-	private DevLogListViewAdapter mDevLogListViewAdapter;
+	private final int HANDLER_DOMBUILD_XML = 0;
+	private ListView mListViewSpecimen;
+	private DevSpecimenListViewAdapter mDevSpecimenListViewAdapter;
 	private AppContext appContext;
-	private List<DeviceLog> lvLogData = new ArrayList<DeviceLog>();
+	private List<SpecimenInfo> lvSpecimenData = new ArrayList<SpecimenInfo>();
 	private View mRelativeLayoutDevDetailEmptyShow;//无数据时的显示内容
 	    @SuppressLint("HandlerLeak")
 		public Handler mHandler = new Handler(){
@@ -57,19 +57,14 @@ public class DevDetailHistoryListFragment extends Fragment{
 							InputSource is = new InputSource(sr); 
 							Document Doc = builder.build(is);
 							Element rootElement = (Element) Doc.getRootElement();
-							parseGetByAidXml(rootElement, lvLogData);
-							if(lvLogData.size() == 0){
+							parseGetByAidXml(rootElement, lvSpecimenData);
+							if(lvSpecimenData.size() == 0){
 								mRelativeLayoutDevDetailEmptyShow.setVisibility(View.VISIBLE);
 							}else{
 								mRelativeLayoutDevDetailEmptyShow.setVisibility(View.GONE);
 							}
-							List<DeviceLog> mvLogData = new ArrayList<DeviceLog>();
-							//把获取的日志信息逆序
-							for(int i = lvLogData.size()-1;i >= 0;i--){
-								mvLogData.add(lvLogData.get(i));
-							}
-							mDevLogListViewAdapter.setListItems(mvLogData);
-							mDevLogListViewAdapter.notifyDataSetChanged();
+							mDevSpecimenListViewAdapter.setListItems(lvSpecimenData);
+							mDevSpecimenListViewAdapter.notifyDataSetChanged();
 						}catch(Exception e)
 						{
 							e.printStackTrace();
@@ -89,13 +84,13 @@ public class DevDetailHistoryListFragment extends Fragment{
 			// TODO Auto-generated method stub
 			String resXml = intent.getStringExtra(WebClient.Param_resXml);
 //			Log.i("huwei", LogPrint.CML() + resXml);
-			if(intent.getAction().equals(WebClient.INTERNAL_ACTION_FINDTODAYALLBYMACID))
+			if(intent.getAction().equals(WebClient.INTERNAL_ACTION_GETSPECIMENMACHINEMACDES))
 			{
 				if(resXml != null)
 				{
 					if(resXml.equals("error") || resXml.equals("null"))
 					{
-						if(mListViewLogs.getAdapter().getCount() == 0){
+						if(mListViewSpecimen.getAdapter().getCount() == 0){
 							mRelativeLayoutDevDetailEmptyShow.setVisibility(View.VISIBLE);
 						}
 					}
@@ -110,21 +105,17 @@ public class DevDetailHistoryListFragment extends Fragment{
 			}
 		}
 	};
-	private void parseGetByAidXml(Element element,List<DeviceLog> node){
+	private void parseGetByAidXml(Element element,List<SpecimenInfo> node){
 		Element e = null;
 		while ((e = element.getChild("machine")) != null) {
-			String value = e.getChild("value") != null ? e.getChild("value")
+			String SpecimenDes = e.getChild("project") != null ? e.getChild("project")
 					.getValue() : "";
-			String time = e.getChild("time") != null ? e.getChild(
-					"time").getValue() : "";
+			String SpecimenNum = e.getChild("total") != null ? e.getChild(
+					"total").getValue() : "";
 		
-			DeviceLog n = new DeviceLog(value, time);
+					SpecimenInfo n = new SpecimenInfo(SpecimenDes, SpecimenNum);
 			node.add(n);
 			element.removeChild("machine");
-		}
-		if ((e = element.getChild("list")) != null) {
-			parseGetByAidXml(e, node);
-			element.removeChild("list");
 		}
 	}
 	@Override
@@ -136,18 +127,18 @@ public class DevDetailHistoryListFragment extends Fragment{
 		setHasOptionsMenu(true);
 		appContext = (AppContext) getActivity().getApplication();
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(WebClient.INTERNAL_ACTION_FINDTODAYALLBYMACID);
+		filter.addAction(WebClient.INTERNAL_ACTION_GETSPECIMENMACHINEMACDES);
 		appContext.registerReceiver(receiver, filter);
 	}
 	//onCreateView是创建该fragment对应的视图
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View mTemLogFragmentView = inflater.inflate(R.layout.dev_detail_listview_fragment, container,false);
-		mListViewLogs = (ListView) mTemLogFragmentView.findViewById(R.id.dev_detail_listview);
+		View mTemLogFragmentView = inflater.inflate(R.layout.dev_specimen_listview_fragment, container,false);
+		mListViewSpecimen = (ListView) mTemLogFragmentView.findViewById(R.id.dev_specimen_listview);
 		mRelativeLayoutDevDetailEmptyShow = mTemLogFragmentView.findViewById(R.id.RelativeLayoutDevDetailEmptyShow);
-		mDevLogListViewAdapter = new DevLogListViewAdapter(this.getActivity(), new ArrayList<DeviceLog>(), R.layout.dev_detail_log_listitem);
-		mListViewLogs.setAdapter(mDevLogListViewAdapter);
-		onDevLogListupdate(WebClient.Method_findTodayAllByMACID);
+		mDevSpecimenListViewAdapter = new DevSpecimenListViewAdapter(getActivity(), new ArrayList<SpecimenInfo>(), R.layout.dev_specimen_listitem);
+		mListViewSpecimen.setAdapter(mDevSpecimenListViewAdapter);
+		onDevLogListupdate(WebClient.Method_getSpecimenMachineMacdes);
 		return mTemLogFragmentView;
 	}
 	

@@ -140,6 +140,7 @@
 	<string name="no_net">没有网络</string>
 	<string name="empty_onclick">点击屏幕 重新加载</string>
 	<string name="surveil_empty_show">无设备，请选择房间</string>
+	<string name="no_received_data">没有收到数据</string>
 	<string name="RadioButtonExternalNet">外网</string>
 	<string name="RadioButtonInwardNet">内网</string>
 	<string name="textview_version_num">版本号</string>
@@ -186,6 +187,11 @@
     <string name="Curve_avarageValue">日平均值</string>
     <string name="Curve_cordon_above">上限</string>
     <string name="Curve_cordon_below">下限</string>
-   
+    
+    <string name="Specimen_Header_Count">序号</string>
+    <string name="Specimen_Header_Name">样本名</string>
+    <string name="Specimen_Header_Num">个数</string>
+    
+    
     
 </resources>

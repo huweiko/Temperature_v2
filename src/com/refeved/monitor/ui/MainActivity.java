@@ -533,7 +533,6 @@ public class MainActivity extends BaseActivity implements
 						}
 					}
 					else {
-						mSurveilListEmptyShow.setVisibility(View.GONE);
 						try{
 							//SAXBuilder是一个JDOM解析器 能将路径中的XML文件解析为Document对象
 							SAXBuilder builder = new SAXBuilder();
@@ -553,6 +552,8 @@ public class MainActivity extends BaseActivity implements
 							
 							if(lvDevData.size() == 0){
 								mSurveilListEmptyShow.setVisibility(View.VISIBLE);
+							}else{
+								mSurveilListEmptyShow.setVisibility(View.GONE);
 							}
 							updateListView(lvDevData);
 							HandlerSendMessage(HANDLER_UPDATE_DEV_COUNT,-1);

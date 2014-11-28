@@ -22,6 +22,17 @@
 			    android:layout_height="match_parent"
 			    android:layout_weight="1"/>
             <ImageButton
+                android:id="@+id/specimen_info_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/device_detail_specimen_button"
+                android:background="@color/theme_blue_option_color"/>
+            <ImageButton
                 android:id="@+id/history_curve_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

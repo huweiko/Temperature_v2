@@ -296,7 +296,7 @@
 		        android:text="@string/surveil_empty_show"
 		        android:textSize="20sp"
 		        android:textColor="@color/theme_gray_text_color" />  
- 	</RelativeLayout>
+ 		</RelativeLayout>
    	</FrameLayout>
     
     <LinearLayout
