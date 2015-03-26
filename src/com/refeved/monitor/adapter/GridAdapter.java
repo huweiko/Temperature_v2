@@ -2,6 +2,7 @@ package com.refeved.monitor.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.refeved.monitor.AppContext;
 import com.refeved.monitor.R;
 import com.refeved.monitor.UIHealper;
 import com.refeved.monitor.struct.DevFrige;
@@ -38,7 +41,7 @@ import com.refeved.monitor.view.OptimizeGridView.OptimizeGridAdapter;
 	public static final String SHOW_DEVICE_INFO="com.refeved.monitor.adapter.broadcast.SHOW_DEVICE_INFO";
 	public static final String SHOW_HANDLE_DIALOG="com.refeved.monitor.adapter.broadcast.SHOW_HANDLE_DIALOG";
 	public GridAdapter(Context context) {
-		mContext = context;
+		mContext =  context;
 		shader_alarm = new LinearGradient(0, 0, 0, 20, mContext.getResources().getColor(R.color.theme_status_text_redcolor_start), mContext.getResources().getColor(R.color.theme_status_text_redcolor_stop), TileMode.CLAMP);
 		shader_normal = new LinearGradient(0, 0, 0, 20, mContext.getResources().getColor(R.color.theme_status_text_greencolor_start), mContext.getResources().getColor(R.color.theme_status_text_greencolor_stop), TileMode.CLAMP);
 		shader_hum = new LinearGradient(0, 0, 0, 20, mContext.getResources().getColor(R.color.theme_status_text_humiditycolor), mContext.getResources().getColor(R.color.theme_status_text_humiditycolor), TileMode.CLAMP);
@@ -127,6 +130,12 @@ import com.refeved.monitor.view.OptimizeGridView.OptimizeGridAdapter;
 //		convertView.setBackgroundResource(R.drawable.grid_item_border);
 		mGridListItemView.handle.setEnabled(true);
 		mGridListItemView.handle.setImageResource(R.drawable.handle);
+		if(((AppContext)mContext.getApplicationContext()).UserName.equals("guest")){
+			mGridListItemView.handle.setVisibility(View.INVISIBLE);
+		}else{
+			mGridListItemView.handle.setVisibility(View.VISIBLE);
+		}
+		
 		if(item.getmType().equals(Device.Type_Frige))
 		{
 			
@@ -135,7 +144,6 @@ import com.refeved.monitor.view.OptimizeGridView.OptimizeGridAdapter;
 			mGridListItemView.status.setText(UIHealper.parseStatus(item.getmStatus()));
 			mGridListItemView.degree.setVisibility(View.VISIBLE);
 			mGridListItemView.degree.setText(((DevFrige)item).getmTemperature()+"℃");
-			mGridListItemView.handle.setVisibility(View.VISIBLE);
 			mGridListItemView.other_status.setVisibility(View.VISIBLE);
 			mGridListItemView.device_status.setVisibility(View.VISIBLE);
 			mGridListItemView.alarm.setVisibility(View.VISIBLE);

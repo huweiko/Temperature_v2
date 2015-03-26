@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.xml.sax.InputSource;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,10 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import com.refeved.monitor.AppContext;
 import com.refeved.monitor.R;
-import com.refeved.monitor.UIHealper;
 import com.refeved.monitor.adapter.DevLogListViewAdapter;
 import com.refeved.monitor.net.WebClient;
 import com.refeved.monitor.struct.DeviceLog;

@@ -14,13 +14,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import com.refeved.monitor.AppContext;
 import com.refeved.monitor.R;
-import com.refeved.monitor.net.WebClient;
-
 import java.lang.Thread;
-
 import android.content.Intent;
 
 public class LoadActivity extends BaseActivity 

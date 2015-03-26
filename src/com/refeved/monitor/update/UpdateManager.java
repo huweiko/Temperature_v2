@@ -154,9 +154,12 @@ public class UpdateManager
 		});
 		if(noticeDialog == null){
 			noticeDialog = builder.create();
+			noticeDialog.setCanceledOnTouchOutside(false);
 			noticeDialog.show();
 		}else{
 			if(!noticeDialog.isShowing()){
+				noticeDialog = builder.create();
+				noticeDialog.setCanceledOnTouchOutside(false);
 				noticeDialog.show();
 			}
 		}
@@ -181,6 +184,7 @@ public class UpdateManager
 			}
 		});
 		mDownloadDialog = builder.create();
+		mDownloadDialog.setCanceledOnTouchOutside(false);
 		mDownloadDialog.show();
 		downloadApk();
 	}
