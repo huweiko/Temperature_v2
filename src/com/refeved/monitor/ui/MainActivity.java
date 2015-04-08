@@ -971,6 +971,12 @@ public class MainActivity extends BaseActivity implements
 
 	}
 	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		lvReserveTreeNodeData = null;
+	}
+	@Override
 	public void onStop(){
 		super.onStop();
 		visiable = false;

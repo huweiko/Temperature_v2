@@ -451,7 +451,7 @@ public class WebClient {
                 Xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><root><macid>"+macid+"</macid><startTime>"+starttime+"</startTime><endTime>"+endtime+"</endTime></root>";
 			}
 			else if(method.equals(Method_getVersionInfo)){
-				Url = URL_OTHERAPI;
+				Url = "http://"  + appContext.ExternalServerIP + ":9102/temperature-ws/services/otherAPI";;
 				Xml = "";
 			}
 			else if(method.equals(Method_setHandleStatus)){
